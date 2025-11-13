@@ -1,0 +1,563 @@
+{
+    "info": {
+        "name": "OpenCart Full API Testing Suite",
+        "_postman_id": "opencart-full-project-001",
+        "description": "Complete Postman collection for OpenCart: Account, Cart, Products, Checkout.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Product Browsing",
+            "item": [
+                {
+                    "name": "Get All Products",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=product/product",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "product/product"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status 200', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Product by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=product/product&product_id=40",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "product/product&product_id=40"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status 200', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Search Products",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=product/search&search=laptop",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "product/search&search=laptop"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Search works', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Shopping Cart",
+            "item": [
+                {
+                    "name": "View Cart",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=checkout/cart",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "checkout/cart"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Cart loaded', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Add Product to Cart",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=checkout/cart/add",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "checkout/cart/add"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "product_id",
+                                    "value": "40"
+                                },
+                                {
+                                    "key": "quantity",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Added to cart', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Cart Quantity",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=checkout/cart/edit",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "checkout/cart/edit"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "key",
+                                    "value": "cart_key_placeholder"
+                                },
+                                {
+                                    "key": "quantity",
+                                    "value": "2"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Quantity updated', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Remove Item from Cart",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=checkout/cart/remove",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "checkout/cart/remove"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "key",
+                                    "value": "cart_key_placeholder"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Removed from cart', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Checkout",
+            "item": [
+                {
+                    "name": "Load Checkout Page",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=checkout/checkout",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "checkout/checkout"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Checkout loads', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Set Billing Address",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=checkout/guest",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "checkout/guest"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "firstname",
+                                    "value": "John"
+                                },
+                                {
+                                    "key": "lastname",
+                                    "value": "Doe"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "john@example.com"
+                                },
+                                {
+                                    "key": "telephone",
+                                    "value": "12345678"
+                                },
+                                {
+                                    "key": "address_1",
+                                    "value": "Street 123"
+                                },
+                                {
+                                    "key": "city",
+                                    "value": "New York"
+                                },
+                                {
+                                    "key": "postcode",
+                                    "value": "10001"
+                                },
+                                {
+                                    "key": "country_id",
+                                    "value": "223"
+                                },
+                                {
+                                    "key": "zone_id",
+                                    "value": "3613"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Billing set', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Set Shipping Method",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=checkout/shipping_method",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "checkout/shipping_method"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "shipping_method",
+                                    "value": "flat.flat"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Shipping method set', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Set Payment Method",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=checkout/payment_method",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "checkout/payment_method"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "payment_method",
+                                    "value": "cod"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Payment method set', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Confirm Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=checkout/confirm",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "checkout/confirm"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Order confirmed', ()=>pm.response.to.have.status(200));"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

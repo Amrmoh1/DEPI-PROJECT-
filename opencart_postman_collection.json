@@ -1,0 +1,511 @@
+{
+    "info": {
+        "name": "OpenCart Account API Testing",
+        "_postman_id": "opencart-collection-001",
+        "description": "Postman collection for testing OpenCart account API endpoints.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Account Registration",
+            "item": [
+                {
+                    "name": "Valid Registration",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=account/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "account/register"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "firstname",
+                                    "value": "John"
+                                },
+                                {
+                                    "key": "lastname",
+                                    "value": "Doe"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "john@example.com"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "Password123"
+                                },
+                                {
+                                    "key": "confirm",
+                                    "value": "Password123"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status code is 200', function(){pm.response.to.have.status(200);});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Missing Email",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=account/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "account/register"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "firstname",
+                                    "value": "John"
+                                },
+                                {
+                                    "key": "lastname",
+                                    "value": "Doe"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "Password123"
+                                },
+                                {
+                                    "key": "confirm",
+                                    "value": "Password123"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Email validation error', function(){pm.response.to.have.status(200);});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Invalid Email Format",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=account/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "account/register"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "firstname",
+                                    "value": "John"
+                                },
+                                {
+                                    "key": "lastname",
+                                    "value": "Doe"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "invalidemail"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "Password123"
+                                },
+                                {
+                                    "key": "confirm",
+                                    "value": "Password123"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Invalid email format', function(){pm.response.to.have.status(200);});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Weak Password",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=account/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "account/register"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "firstname",
+                                    "value": "John"
+                                },
+                                {
+                                    "key": "lastname",
+                                    "value": "Doe"
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "weakpw@example.com"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "123"
+                                },
+                                {
+                                    "key": "confirm",
+                                    "value": "123"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Weak password validation', function(){pm.response.to.have.status(200);});"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Account Login",
+            "item": [
+                {
+                    "name": "Valid Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=account/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "account/login"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "email",
+                                    "value": "john@example.com"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "Password123"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Login success', function(){pm.response.to.have.status(200);});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Wrong Credentials",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=account/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "account/login"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "email",
+                                    "value": "wrong@example.com"
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "wrongpass"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Invalid login', function(){pm.response.to.have.status(200);});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Missing Fields",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=account/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "account/login"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "email",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "password",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Missing fields', function(){pm.response.to.have.status(200);});"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Account Logout",
+            "item": [
+                {
+                    "name": "Logout",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=account/logout",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "account/logout"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Logout success', function(){pm.response.to.have.status(200);});"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Password Recovery",
+            "item": [
+                {
+                    "name": "Forgot Password Invalid Email",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/index.php?route=account/forgotten",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "index.php"
+                            ],
+                            "query": [
+                                {
+                                    "key": "route",
+                                    "value": "account/forgotten"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "email",
+                                    "value": "notfound@example.com"
+                                }
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Email not found', function(){pm.response.to.have.status(200);});"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
